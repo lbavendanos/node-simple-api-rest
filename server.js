@@ -3,14 +3,9 @@
 const express = require('express'),
       mongoose = require('mongoose'),
       bodyParse = require('body-parser'),
+      morgan = require('morgan'),
+      config = require('./config'),
       api = require('./src/routes/api.route');
-
-// configura MongoDB
-const DB_NAME = 'api';
-const DB_URL = `mongodb://localhost:27017/${DB_NAME}`;
-
-// configura puerto
-const PORT = process.env.PORT || 3000; 
 
 const app = express();
 
@@ -19,13 +14,16 @@ const app = express();
 app.use(bodyParse.urlencoded({ extended: false }));
 app.use(bodyParse.json());
 
+// morgan para log requests en la consola
+app.use(morgan(config.MORGAN_FORMAT));
+
 // configura rutas
 app.use('/api', api);
 
 // configura tipo de promesa para MongoDB
 mongoose.Promise = global.Promise;
 // conecta MongoDB
-mongoose.connect(DB_URL, (err) => {
+mongoose.connect(config.MONGO_DB_URL, (err) => {
   // captura error
   if(err){
     return console.error('Error en la conección de la BD:', err);
@@ -33,7 +31,7 @@ mongoose.connect(DB_URL, (err) => {
 
   console.log('MongoDB run!!');
   // ejecuta servidor
-  app.listen(PORT, function () {
-    console.log(`Corriendo REST API en el puerto ${PORT}! http://localhost:${PORT}`);
+  app.listen(config.PORT_EXPRESS, function () {
+    console.log(`Corriendo REST API en el puerto ${config.PORT_EXPRESS}! http://localhost:${config.PORT_EXPRESS}`);
   });
 });
