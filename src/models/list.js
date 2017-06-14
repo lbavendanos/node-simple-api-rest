@@ -7,12 +7,16 @@ const mongoose = require('mongoose'),
 let listSchema = new Schema({
     name: { type: String, required: true },
     last_name: { type: String, required: true },
-    age: { type: String, default: 0 },
-    created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date, default: Date.now }    
+    age: { type: String, default: 0 }    
+}, {
+    // opcion timestamps
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt:  'updated_at'
+    }
 });
 
-// crea model en base a un schema
+// crea model con el schema
 let List = mongoose.model('List', listSchema);
 
 module.exports = List;
