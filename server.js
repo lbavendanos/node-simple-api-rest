@@ -4,8 +4,13 @@ const express = require('express'),
       mongoose = require('mongoose'),
       bodyParse = require('body-parser'),
       morgan = require('morgan'),
-      config = require('./config'),
-      api = require('./src/routes/api.route');
+      appConfig = require('./src/config/app'),
+      appDataBase = require('./src/config/database'),
+      webRoute = require('./src/routes/web.route'),
+      apiRoute = require('./src/routes/api.route');
+
+// cargar variables de entorno
+require('dotenv').config();
 
 const app = express();
 
@@ -15,15 +20,16 @@ app.use(bodyParse.urlencoded({ extended: false }));
 app.use(bodyParse.json());
 
 // morgan para log requests en la consola
-app.use(morgan(config.MORGAN_FORMAT));
+app.use(morgan(appConfig.MORGAN_FORMAT));
 
 // configura rutas
-app.use('/api', api);
+app.use('/', webRoute);
+app.use('/api', apiRoute);
 
 // configura tipo de promesa para MongoDB
 mongoose.Promise = global.Promise;
 // conecta MongoDB
-mongoose.connect(config.MONGO_DB_URL, (err) => {
+mongoose.connect(appDataBase.DB_URL, appDataBase.DB_OPTION, (err) => {
   // captura error
   if(err){
     return console.error('Error en la conección de la BD:', err);
@@ -31,7 +37,7 @@ mongoose.connect(config.MONGO_DB_URL, (err) => {
 
   console.log('MongoDB run!!');
   // ejecuta servidor
-  app.listen(config.PORT_EXPRESS, function () {
-    console.log(`Corriendo REST API en el puerto ${config.PORT_EXPRESS}! http://localhost:${config.PORT_EXPRESS}`);
+  app.listen(appConfig.EXPRESS_PORT, function () {
+    console.log(`Corriendo REST API en el puerto ${appConfig.EXPRESS_PORT}! http://localhost:${appConfig.EXPRESS_PORT}`);
   });
 });

@@ -7,7 +7,7 @@ const mongoose = require('mongoose'),
 // crea schema
 let userSchema = new Schema({
     email: { type: String, unique: true, lowercase: true, required: true },
-    password: { type: String, select: false },
+    password: { type: String },
     name: { type: String, required: true }
 }, {
     // opcion timestamps
@@ -18,7 +18,7 @@ let userSchema = new Schema({
 });
 
 // ejeuta middleware antes de guardar
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function (next){
     let user = this;
 
     // si no a modificado pasa al siguiente middleware
@@ -30,7 +30,7 @@ userSchema.pre('save', (next) => {
         if(err) return next();
 
         // encripta password con el salto generado
-        bcrypt.hash(user.password, salt, null, (err, hash) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
             // captura error
             if(err) return next();
 
@@ -40,6 +40,11 @@ userSchema.pre('save', (next) => {
 
     });
 });
+
+userSchema.methods.comparePassword = function (userPassword) {
+    // comparar password
+    return bcrypt.compareSync(userPassword, this.password);
+};
 
 // crea model con el schema
 let User = mongoose.model('User', userSchema);

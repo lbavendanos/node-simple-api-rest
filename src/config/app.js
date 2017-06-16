@@ -1,20 +1,17 @@
 // configura puerto
 // default '3000'
-const PORT_EXPRESS = process.env.PORT_EXPRESS || 3000;
+const EXPRESS_PORT = process.env.EXPRESS_PORT || 3000;
 
 // configura morgan
 // otras opciones: combined, common, dev, short, tiny
 // default 'dev'
 const MORGAN_FORMAT = process.env.MORGAN_FORMAT || 'dev';
 
-// configura MongoDB
-const MONGO_DB_NAME = 'api';
-const MONGO_DB_URL = `mongodb://localhost:27017/${MONGO_DB_NAME}`;
+// configura JWT
+const TOKEN_SECRET = process.env.TOKEN_SECRET || 'secret';
 
 module.exports = {
-    PORT_EXPRESS,
+    EXPRESS_PORT,
     MORGAN_FORMAT,
-    MONGO_DB_NAME,
-    MONGO_DB_URL
-
+    TOKEN_SECRET
 }

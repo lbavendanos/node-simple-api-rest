@@ -47,10 +47,8 @@ class ListController {
 
         List.findById(params.id, (err, list) => {
             // captura error
-            if(err){
-                return res.status(500)
-                            .json({ error: `Error al obtener dato: ${err}` });
-            }
+            if(err) return res.status(500).json({ error: `Error al obtener dato: ${err}` });
+            if(!list) return res.status(404).json({ error: 'El dato no existe' });
 
             res.status(200)
                 .json({ message: 'Dato recuperado', list });

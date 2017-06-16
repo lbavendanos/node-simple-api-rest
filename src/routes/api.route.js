@@ -2,9 +2,13 @@
 
 const express = require('express');
 const router = express.Router();
+const isAuth = require('./../middlewares/auth.middleware');
 const ListController = require('./../controllers/list.controller');
 
 let listController = new ListController();
+
+// middleware específico para este router
+router.use((req, res, next) => isAuth(req, res, next));
 
 // establece rutas REST
 router.get('/list', (req, res) => listController.index(req, res));
