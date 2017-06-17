@@ -1,17 +1,23 @@
 {
   "name": "apirest",
   "version": "1.0.0",
-  "description": "API REST Base en Express y MongoDB",
+  "description": "Simple API REST con Express, MongoDB y autenticacion con token (JWT)",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "author": "lbavendanos",
   "license": "MIT",
+  "engines": {
+    "node": "7.9.0",
+    "npm": "5.0.3"
+  },
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "jwt-simple": "^0.5.1",

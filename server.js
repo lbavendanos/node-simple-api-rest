@@ -2,6 +2,7 @@
 
 const express = require('express'),
       mongoose = require('mongoose'),
+      cors = require('cors'),
       bodyParse = require('body-parser'),
       morgan = require('morgan'),
       appConfig = require('./src/config/app'),
@@ -13,6 +14,10 @@ const express = require('express'),
 require('dotenv').config();
 
 const app = express();
+
+// congfigurar CORS
+// esta configuración habilita todas las CORS Requests
+app.use(cors());
 
 // configura la app para utilizar body-parse
 // esto permitirá obtener los datos de un POST
@@ -35,9 +40,9 @@ mongoose.connect(appDataBase.DB_URL, appDataBase.DB_OPTION, (err) => {
     return console.error('Error en la conección de la BD:', err);
   }
 
-  console.log('MongoDB run!!');
+  console.log('Mongo ejecutado correctamente.');
   // ejecuta servidor
   app.listen(appConfig.EXPRESS_PORT, function () {
-    console.log(`Corriendo REST API en el puerto ${appConfig.EXPRESS_PORT}! http://localhost:${appConfig.EXPRESS_PORT}`);
+    console.log(`Corriendo REST API en el puerto ${appConfig.EXPRESS_PORT}: http://localhost:${appConfig.EXPRESS_PORT}`);
   });
 });
