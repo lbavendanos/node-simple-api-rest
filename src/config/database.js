@@ -1,18 +1,18 @@
 // configura MongoDB
-const DB_HOST = process.env.DB_HOST || '127.0.0.1';
-const DB_PORT = process.env.DB_PORT || '27017';
-const DB_DATABASE = process.env.DB_DATABASE || 'api';
-const DB_USERNAME = process.env.DB_USERNAME || '';
-const DB_PASSWORD = process.env.DB_PASSWORD || '';
-const DB_URL = `mongodb://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`;
-const DB_OPTION = { user: DB_USERNAME, pass: DB_PASSWORD };
+const MONGODB_HOST = process.env.MONGODB_HOST || '127.0.0.1';
+const MONGODB_PORT = process.env.MONGODB_PORT || '27017';
+const MONGODB_DATABASE = process.env.MONGODB_DATABASE || 'api';
+const MONGODB_USERNAME = process.env.MONGODB_USERNAME || '';
+const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD || '';
+const MONGODB_URI = process.env.MONGODB_URI || `mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE}`;
+const MONGODB_OPTION = { user: MONGODB_USERNAME, pass: MONGODB_PASSWORD };
 
 module.exports = {
-    DB_HOST,
-    DB_PORT,
-    DB_DATABASE,
-    DB_USERNAME,
-    DB_PASSWORD,
-    DB_URL,
-    DB_OPTION
+    MONGODB_HOST,
+    MONGODB_PORT,
+    MONGODB_DATABASE,
+    MONGODB_USERNAME,
+    MONGODB_PASSWORD,
+    MONGODB_URI,
+    MONGODB_OPTION
 }

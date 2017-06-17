@@ -34,7 +34,7 @@ app.use('/api', apiRoute);
 // configura tipo de promesa para MongoDB
 mongoose.Promise = global.Promise;
 // conecta MongoDB
-mongoose.connect(appDataBase.DB_URL, appDataBase.DB_OPTION, (err) => {
+mongoose.connect(appDataBase.MONGODB_URI, appDataBase.MONGODB_OPTION, (err) => {
   // captura error
   if(err){
     return console.error('Error en la conección de la BD:', err);
@@ -42,7 +42,7 @@ mongoose.connect(appDataBase.DB_URL, appDataBase.DB_OPTION, (err) => {
 
   console.log('Mongo ejecutado correctamente.');
   // ejecuta servidor
-  app.listen(appConfig.EXPRESS_PORT, function () {
-    console.log(`Corriendo REST API en el puerto ${appConfig.EXPRESS_PORT}: http://localhost:${appConfig.EXPRESS_PORT}`);
+  app.listen(appConfig.PORT, function () {
+    console.log(`Corriendo REST API en el puerto ${appConfig.PORT}: http://localhost:${appConfig.PORT}`);
   });
 });
