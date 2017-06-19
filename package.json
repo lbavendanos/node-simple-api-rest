@@ -1,7 +1,7 @@
 {
   "name": "apirest",
   "version": "1.0.0",
-  "description": "Simple API REST con Express, MongoDB y autenticacion con token (JWT)",
+  "description": "Simple API REST con Express, MongoDB y autenticación con Token (JWT).",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -4,8 +4,8 @@ const MONGODB_PORT = process.env.MONGODB_PORT || '27017';
 const MONGODB_DATABASE = process.env.MONGODB_DATABASE || 'api';
 const MONGODB_USERNAME = process.env.MONGODB_USERNAME || '';
 const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD || '';
-const MONGODB_URI = process.env.MONGODB_URI || `mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE}`;
 const MONGODB_OPTION = { user: MONGODB_USERNAME, pass: MONGODB_PASSWORD };
+const MONGODB_URI = process.env.MONGODB_URI || `mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE}`;
 
 module.exports = {
     MONGODB_HOST,
@@ -13,6 +13,6 @@ module.exports = {
     MONGODB_DATABASE,
     MONGODB_USERNAME,
     MONGODB_PASSWORD,
-    MONGODB_URI,
-    MONGODB_OPTION
+    MONGODB_OPTION,
+    MONGODB_URI
 }
